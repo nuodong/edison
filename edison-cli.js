@@ -14,15 +14,17 @@ EdisonCLI.prototype = {
 	*/
 	blink: function(next){
 		var me = this;
+  				console.log("about to blink");
 		cylon
   			.robot()
   			.connection('edison', { adaptor: 'intel-iot' })
 			.device('led', { driver: 'led', pin: 13, connection: 'edison' })
   			.on('ready', function(my) {
+  				console.log("about to blink");
 				 setInterval(function() {
 				  my.led.toggle();
-				  next();
-    				}, 1000);
+				  //next();
+    		}, 1000);
 		 });
 	}
 };

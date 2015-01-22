@@ -26,8 +26,9 @@ program
   .action(function(){
 		//Initiate a connection to an attached Edison.
 		edisonCLI.blink(function handleBlink(err, result){
-		  if ( err ) {
-			  	process.exit(1);
+			console.log("blinking");
+		    if ( err ) {
+			  	//process.exit(1);
 			  } else {
 			  // Fail!
 		  }

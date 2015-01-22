@@ -1,5 +1,5 @@
 # Edison
-Edison is a CLI tool for help developers work on Intel Edison. It comes with helpful generators to instantly create working code for common tasks such as sending Twilio SMS, displaying the local weather on an LCD and making the Intel Edision Arduino Breakout board's "pin 13" LED blink. 
+Edison is a CLI tool for help developers work on Intel Edison. It comes with helpful generators to instantly create working code for common tasks such as displaying the local weather on an LCD and making the Intel Edision Arduino Breakout board's "pin 13" LED blink. 
 
 *At this time, only Mac (Yosemite and similar) are supported*
 

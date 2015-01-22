@@ -19,7 +19,7 @@
     "bugs":{ 
         "url" : "https://github.com/mashery/edison/issues"
     },
-    "os" : [ "darwin", "!linux", "!win32" ],
+    "os" : [ "!darwin", "linux", "!win32" ],
     "bin": {
       "edison": "edison.js"
     }

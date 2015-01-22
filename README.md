@@ -1,7 +1,7 @@
 # Edison
 Edison is a CLI tool for help developers work on Intel Edison. It comes with helpful generators to instantly create working code for common tasks such as displaying the local weather on an LCD and making the Intel Edision Arduino Breakout board's "pin 13" LED blink. 
 
-*At this time, only Mac (Yosemite and similar) are supported*
+*To install locally while developing us npm install -g*
 
 [![npm version](https://badge.fury.io/js/bloop.svg)](http://badge.fury.io/js/bloop)
 

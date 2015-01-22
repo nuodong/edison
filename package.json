@@ -13,7 +13,8 @@
     "scripts": { "test": "make test" },
     "dependencies": {
         "commander":"2.5.x",
-        "promptly":"0.2.x"
+        "promptly":"0.2.x",
+        "cylon-intel-iot": "*"
     },
     "bugs":{ 
         "url" : "https://github.com/mashery/edison/issues"

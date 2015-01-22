@@ -20,6 +20,6 @@
     },
     "os" : [ "darwin", "!linux", "!win32" ],
     "bin": {
-      "bloop": "edison.js"
+      "edison": "edison.js"
     }
 }

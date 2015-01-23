@@ -19,7 +19,7 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 
 `$ edison status`
 
-*A quick check to let you know if Edison is online or offline. Use configured_edison --wifi to get your Edison online.*
+*A quick check to let you know if Edison is online or offline. Use 'edison wifi' to get your Edison online.*
 
 `$ edison weather (-c, --city to set a city, defaults to Seattle), (-s, --state to set state, defaults to WA), (-k, --key required Weather Underground API key) `
 

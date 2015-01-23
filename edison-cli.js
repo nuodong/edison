@@ -3,29 +3,38 @@
 */
 var util = require('util'),
     exec = require('child_process').exec,
-    cylon = require('cylon'),
     child;
 
 var EdisonCLI = function () {};
 
 EdisonCLI.prototype = {
+
 	/**
-	* Automatically runs a program to make Edison's onboard LED start blinking.
+	* Automatically starts blinking Edison's pin 13
 	*/
 	blink: function(next){
-		var me = this;
-  				console.log("about to blink");
-		cylon
-  			.robot()
-  			.connection('edison', { adaptor: 'intel-iot' })
-			.device('led', { driver: 'led', pin: 13, connection: 'edison' })
-  			.on('ready', function(my) {
-  				console.log("about to blink");
-				 setInterval(function() {
-				  my.led.toggle();
-				  //next();
-    		}, 1000);
-		 });
+		var Cylon = require('cylon');
+
+		Cylon.robot({
+		  connections: {
+		    edison: { adaptor: 'intel-iot' }
+		  },
+
+		  devices: {
+		    led: { driver: 'led', pin: 13 }
+		  },
+
+		  work: function(my) {
+		    every((1).second(), my.led.toggle);
+		  }
+		}).start();
+	},
+
+	/**
+	* Automatically runs a program to get the weather.
+	*/
+	weather: function(next){
+		//
 	}
 };
 

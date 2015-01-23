@@ -26,14 +26,48 @@ program
   .action(function(){
 		//Initiate a connection to an attached Edison.
 		edisonCLI.blink(function handleBlink(err, result){
-			console.log("blinking");
-		    if ( err ) {
-			  	//process.exit(1);
+		  if ( err ) {
+			  	process.exit(1);
 			  } else {
 			  // Fail!
 		  }
 		});
 	});
+
+/**
+* Get a local weather report, takes in a city and an API key from weather underground
+*/ 
+program
+  .command('weather')
+  .description('Logs a weather report using the Weather Channel API.')
+  .action(function(){
+		//Initiate a connection to an attached Edison.
+		edisonCLI.weather(function handleWeather(err, result){
+		  if ( err ) {
+			  	process.exit(1);
+			  } else {
+			  // Fail!
+		  }
+		});
+	});
+
+/**
+* Get a local weather report, takes in a city and an API key from weather underground
+*/ 
+program
+  .command('weather')
+  .description('Logs a weather report using the Weather Channel API.')
+  .action(function(){
+		//Initiate a connection to an attached Edison.
+		edisonCLI.weather(function handleWeather(err, result){
+		  if ( err ) {
+			  	process.exit(1);
+			  } else {
+			  // Fail!
+		  }
+		});
+	});
+  
 /**
 * Parse the args (e.g. --a etc)
 */

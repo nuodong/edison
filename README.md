@@ -5,7 +5,7 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 
 *To install locally while developing us npm install -g*
 
-[![npm version](https://badge.fury.io/js/bloop.svg)](http://badge.fury.io/js/bloop)
+[![npm version](https://badge.fury.io/js/edison.svg)](http://badge.fury.io/js/edison)
 
 ## Commands:
 

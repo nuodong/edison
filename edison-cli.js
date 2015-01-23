@@ -46,9 +46,10 @@ EdisonCLI.prototype = {
 		    json: true
 		}, function (error, response, body) {
 		    if (!error && response.statusCode === 200) {
-		        var entries = "temp: " + body['temp_f'] + " wind mph: " + body['wind_mph'];
-		        console.log(body);
-		        next(null, body);
+		    	var bodyparse = JSON.parse(body);
+		    	//var observation = bodyparse.current_observation;
+		        //var entries = "temp: " + observation.temp_f + " wind mph: " + observation.wind_mph;
+		        next(null, bodyparse);
 		    } else {
 		    	next("There was an error. Did you provide an API key? Is your Edison online? Try running edison status to check!");
 		    }
@@ -90,16 +91,8 @@ EdisonCLI.prototype = {
 	* Scan for a Wi-Fi network
 	*/
 	scanWiFi: function(next){
-		async.parallel([
-		  async.apply(exec, 'configure_edison --wifi')
-		], 
-		function (err, results) {
-		  if(err){
-		  	next("Problem scanning for Wi-Fi. Do you have the latest Edison image?");
-		  } else {
-		  	next(null, "Success!");
-		  }
-		});
+		var spawn = require('child_process').spawn,
+		ssh = spawn('configure_edison', ["--wifi"],{stdio: 'inherit'});
 	}
 
 	/**

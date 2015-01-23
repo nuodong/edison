@@ -41,8 +41,7 @@ EdisonCLI.prototype = {
 
 		request({
 		    url: url,
-		    json: true,
-		    qs: params
+		    json: true
 		}, function (error, response, body) {
 		    if (!error && response.statusCode === 200) {
 		        var entries = body;

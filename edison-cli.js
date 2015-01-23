@@ -28,6 +28,7 @@ EdisonCLI.prototype = {
 		  },
 
 		  work: function(my) {
+		  	console.log("Hit CNTRL+C to exit at any time.")
 		    every((interval).second(), my.led.toggle);
 		  }
 		}).start();
@@ -37,7 +38,7 @@ EdisonCLI.prototype = {
 	* Automatically runs an API call to get the weather.
 	*/
 	weather: function(key, state, city, next){
-		//
+		// Build the API string.
 		var url = "http://api.wunderground.com/api/" + key + "/forecast/q/" + state + "/" + city + ".json";
 
 		request({
@@ -49,7 +50,7 @@ EdisonCLI.prototype = {
 		        console.log(body);
 		        next(null, body);
 		    } else {
-		    	next(error);
+		    	next("There was an error. Did you provide an API key? Is your Edison online? Try running edison status to check!");
 		    }
 		});
 	},
@@ -67,6 +68,9 @@ EdisonCLI.prototype = {
 		});
 	},
 
+	/**
+	* Execute an upgrade on LibMRAA.
+	*/
 	updateLibMRAA: function(next){
 		async.parallel([
 		  async.apply(exec, 'echo \"src maa-upm http://iotdk.intel.com/repos/1.1/intelgalactic\" > /etc/opkg/intel-iotdk.conf'),
@@ -74,7 +78,27 @@ EdisonCLI.prototype = {
 		  async.apply(exec, 'opkg upgrade')
 		], 
 		function (err, results) {
-		  console.log(results);
+		  if(err){
+		  	next("You may already have the latest libMRAA. Try running opkg update then opkg upgrade to see.");
+		  } else {
+		  	next(null, "Success!");
+		  }
+		});
+	},
+
+	/**
+	* Scan for a Wi-Fi network
+	*/
+	scanWiFi: function(next){
+		async.parallel([
+		  async.apply(exec, 'configure_edison --wifi')
+		], 
+		function (err, results) {
+		  if(err){
+		  	next("Problem scanning for Wi-Fi. Do you have the latest Edison image?");
+		  } else {
+		  	next(null, "Success!");
+		  }
 		});
 	}
 

@@ -114,6 +114,23 @@ program
 	});
 
 /**
+* Get Edison online via wi-fi
+*/ 
+program
+  .command('wifi')
+  .description('Scan for a wi-fi network to join.')
+  .action(function(){
+		edisonCLI.scanWiFi(function handleWiFi(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  	console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
 * Turn Edison into an iBeacon
 */ 
 /*

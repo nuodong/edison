@@ -66,6 +66,15 @@ EdisonCLI.prototype = {
 		});
 	},
 
+	updateLibMRAA: function(next){
+		var command = spawn('sh', ['/upgrade_libmraa.sh']);
+		var output  = [];
+
+		command.on('close', function(code) {
+		     next(null, "success");    
+		});
+	}
+
 	/**
 	* Automatically turns Edison into an iBeacon
 	*/

@@ -87,6 +87,36 @@ program
 	});
 
 /**
+* Get the current installed version of libMRAA
+*/ 
+program
+  .command('mraa-version')
+  .description('Output the current version of libMRAA installed on this Intel Edison')
+  .action(function(){
+		console.log(require("mraa").getVersion());
+	});
+
+/**
+* Update the current installed version of libMRAA
+*/ 
+program
+  .command('update-mraa')
+  .description('Update the version of libMRAA installed on this Intel Edison')
+  .action(function(){
+		console.log(require("mraa").getVersion());
+
+		edisonCLI.updateLibMRAA(function handleUpgrade(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
 * Turn Edison into an iBeacon
 */ 
 /*

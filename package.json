@@ -14,7 +14,9 @@
     "dependencies": {
         "commander":"2.5.x",
         "promptly":"0.2.x",
-        "cylon-intel-iot": "*"
+        "cylon-intel-iot": "*",
+        "request":"*",
+        "moment":"*"
     },
     "bugs":{ 
         "url" : "https://github.com/mashery/edison/issues"

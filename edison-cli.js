@@ -3,6 +3,8 @@
 */
 var util = require('util'),
     exec = require('child_process').exec,
+    request = require("request"),
+	moment = require("moment"),
     child;
 
 var EdisonCLI = function () {};
@@ -12,7 +14,7 @@ EdisonCLI.prototype = {
 	/**
 	* Automatically starts blinking Edison's pin 13
 	*/
-	blink: function(next){
+	blink: function(interval, pin, next){
 		var Cylon = require('cylon');
 
 		Cylon.robot({
@@ -21,20 +23,48 @@ EdisonCLI.prototype = {
 		  },
 
 		  devices: {
-		    led: { driver: 'led', pin: 13 }
+		    led: { driver: 'led', pin: pin }
 		  },
 
 		  work: function(my) {
-		    every((1).second(), my.led.toggle);
+		    every((interval).second(), my.led.toggle);
 		  }
 		}).start();
 	},
 
 	/**
+	* Automatically runs an API call to get the weather.
+	*/
+	weather: function(key, state, city, next){
+		//
+		var url = "http://api.wunderground.com/api/" + key + "/forecast/q/" + state + "/" + city + ".json";
+
+		request({
+		    url: url,
+		    json: true,
+		    qs: params
+		}, function (error, response, body) {
+		    if (!error && response.statusCode === 200) {
+		        var entries = body;
+		        console.log(body);
+		        next(null, body);
+		    } else {
+		    	next(error);
+		    }
+		});
+	},
+
+	/**
 	* Automatically runs a program to get the weather.
 	*/
-	weather: function(next){
-		//
+	status: function(next){
+		// Check and see if Edison is online or not.
+		require('dns').resolve('www.google.com', function(err) {
+		  if (err)
+		     next("You are not online, try running configure_edison --wifi");
+		  else
+		  	 next(null, "You are online!");
+		});
 	}
 };
 

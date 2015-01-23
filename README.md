@@ -9,9 +9,9 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 
 ## Commands:
 
-`$ edison blink (-i, --i to set a blink interval in seconds, defaults to 1 second)`
+`$ edison blink (-i, --i to set a blink interval in seconds, defaults to 1 second), (-p, --pin to specify the desired pin, defaults to 13)`
 
-*Automatically generates and executes code to make the Edison Arduino Breakout Board LED blink. Note: This is meant for the large form factor Arduino breakout board! Use -i or --interval to set a blink interval in seconds. Defaults to 1 second.*
+*Automatically generates and executes code to make the Edison Arduino Breakout Board LED blink. Note: This is meant for the large form factor Arduino breakout board! Use -i or --interval to set a blink interval in seconds. Defaults to 1 second. Change the pin by passing in -p or --pin, defaults to pin 13.*
 
 `$ edison wifi`
 

@@ -1,5 +1,5 @@
-rfkill unblock bluetooth
-hciconfig hci0 up
+rfkill unblock bluetooth;
+hciconfig hci0 up;
 
 vi /etc/opkg/base-feeds.conf (insert only following lines)
 src/gz all http://repo.opkg.net/edison/repo/all

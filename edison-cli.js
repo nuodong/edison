@@ -5,7 +5,8 @@ var util = require('util'),
     exec = require('child_process').exec,
     request = require("request"),
 	moment = require("moment"),
-    child;
+    child = require('child_process'),
+    async = require('async');
 
 var EdisonCLI = function () {};
 
@@ -67,11 +68,13 @@ EdisonCLI.prototype = {
 	},
 
 	updateLibMRAA: function(next){
-		var command = spawn('sh', ['/upgrade_libmraa.sh']);
-		var output  = [];
-
-		command.on('close', function(code) {
-		     next(null, "success");    
+		async.parallel([
+		  async.apply(exec, 'echo \"src maa-upm http://iotdk.intel.com/repos/1.1/intelgalactic\" > /etc/opkg/intel-iotdk.conf'),
+		  async.apply(exec, 'opkg update'),
+		  async.apply(exec, 'opkg upgrade')
+		], 
+		function (err, results) {
+		  console.log(results);
 		});
 	}
 

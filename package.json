@@ -16,7 +16,8 @@
         "promptly":"0.2.x",
         "cylon-intel-iot": "*",
         "request":"*",
-        "moment":"*"
+        "moment":"*",
+        "async":"*"
     },
     "bugs":{ 
         "url" : "https://github.com/mashery/edison/issues"

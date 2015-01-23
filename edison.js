@@ -14,7 +14,7 @@ var program = require('commander'),
 * Define version, help info here
 */
 program
-    .version('0.0.2')
+    .version('0.0.3')
     .usage('[options] <keywords>');
 
 /**
@@ -86,6 +86,47 @@ program
 		});
 	});
 
+/**
+* Turn Edison into an iBeacon
+*/ 
+/*
+program
+  .command('beacon')
+  .description('Turn Intel Edison into an iBeacon using Bleno.')
+  .action(function(){
+		//Initiate a connection to an attached Edison.
+		edisonCLI.status(function handleBeacon(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+*/
+
+/**
+* Install + Enable Bluetooth Smart
+*/ 
+/*
+program
+  .command('ble-enable')
+  .description('Configure Edison for BLE development.')
+  .action(function(){
+		//Initiate a connection to an attached Edison.
+		edisonCLI.enableBluetoothSmart(function handleBLEEnable(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+*/
 /**
 * Parse the args (e.g. --a etc)
 */

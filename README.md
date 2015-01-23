@@ -7,9 +7,17 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 
 ## Commands:
 
-`$ edison blink`
+`$ edison blink (-i, --i to set a blink interval in seconds, defaults to 1 second)`
 
-*Automatically generates and executes code to make the Edison Arduino Breakout Board LED blink. Note: This is meant for the large form factor Arduino breakout board!*
+*Automatically generates and executes code to make the Edison Arduino Breakout Board LED blink. Note: This is meant for the large form factor Arduino breakout board! Use -i or --interval to set a blink interval in seconds. Defaults to 1 second.*
+
+`$ edison status`
+
+*A quick check to let you know if Edison is online or offline. Use configured_edison --wifi to get your Edison online.*
+
+`$ edison weather (-c, --city to set a city, defaults to Seattle), (-s, --state to set state, defaults to WA), (-k, --key required Weather Underground API key) `
+
+*Automatically makes a REST API call to the Weather Underground API. You must have a registered API key and provide it using -k or --key. City and State default to Seattle, WA unless otherwise specified.*
 
 ## Installation:
 

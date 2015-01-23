@@ -21,6 +21,7 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 
 *Automatically makes a REST API call to the Weather Underground API. You must have a registered API key and provide it using -k or --key. City and State default to Seattle, WA unless otherwise specified.*
 
+<<<<<<< HEAD
 `$ edison mraa-version`
 
 *Print the current installed version of libMRAA.*
@@ -28,6 +29,8 @@ Edison is a CLI tool for help developers work on Intel Edison. It comes with hel
 `$ edison update-mraa`
 
 *Update the installed version of libMRAA.*
+=======
+>>>>>>> 6935055bfaddb613fccfc4c12e182f835429e8b3
 
 ## Installation:
 

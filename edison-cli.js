@@ -5,6 +5,7 @@ var util = require('util'),
     exec = require('child_process').exec,
     request = require("request"),
 	moment = require("moment"),
+	fs = require("fs"),
     child = require('child_process'),
     async = require('async');
 
@@ -49,7 +50,7 @@ EdisonCLI.prototype = {
 		    	var result = JSON.stringify(body,null, 4);
 
 		    	// write the output to a file.
-		    	var outputFilename = '/weather.json';
+		    	var outputFilename = './weather.json';
 
 				fs.writeFile(outputFilename, result, function(err) {
 				    if(err)

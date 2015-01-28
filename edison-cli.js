@@ -46,10 +46,11 @@ EdisonCLI.prototype = {
 		    json: true
 		}, function (error, response, body) {
 		    if (!error && response.statusCode === 200) {
-		    	var bodyparse = JSON.parse(body);
-		    	//var observation = bodyparse.current_observation;
+		    	//var bodyparse = JSON.parse(body);
+		    	var result = JSON.stringify(body,null, 4);
+		    	//var observation = bodyparse.response.current_observation;
 		        //var entries = "temp: " + observation.temp_f + " wind mph: " + observation.wind_mph;
-		        next(null, bodyparse);
+		        next(null, result);
 		    } else {
 		    	next("There was an error. Did you provide an API key? Is your Edison online? Try running edison status to check!");
 		    }
@@ -63,7 +64,7 @@ EdisonCLI.prototype = {
 		// Check and see if Edison is online or not.
 		require('dns').resolve('www.google.com', function(err) {
 		  if (err)
-		     next("You are not online, try running configure_edison --wifi");
+		     next("You are not online, try running \'edison wifi\'");
 		  else
 		  	 next(null, "You are online!");
 		});

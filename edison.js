@@ -14,7 +14,7 @@ var program = require('commander'),
 * Define version, help info here
 */
 program
-    .version('0.0.4')
+    .version('0.0.5')
     .usage('[options] <keywords>');
 
 /**
@@ -24,7 +24,7 @@ program
   .command('blink')
   .option("-p, --pin [option]", "Pin you would like to blink, defaults to 13.")
   .option("-i, --interval [option]", "Blink speed in seconds, defaults to 1.")
-  .description('Generates a blink program for the Arduino breakout board using Cylon.js and executes it.')
+  .description('Blink the on-board LED using Cylon.js.')
   .action(function(options){
 		//Initiate a connection to an attached Edison.
   		var interval = (options.interval)?options.interval:1;

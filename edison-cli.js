@@ -46,11 +46,17 @@ EdisonCLI.prototype = {
 		    json: true
 		}, function (error, response, body) {
 		    if (!error && response.statusCode === 200) {
-		    	//var bodyparse = JSON.parse(body);
 		    	var result = JSON.stringify(body,null, 4);
-		    	//var observation = bodyparse.response.current_observation;
-		        //var entries = "temp: " + observation.temp_f + " wind mph: " + observation.wind_mph;
-		        next(null, result);
+
+		    	// write the output to a file.
+		    	var outputFilename = '/weather.json';
+
+				fs.writeFile(outputFilename, result, function(err) {
+				    if(err)
+				      next("There was an error writing the weather output to a file.");
+		   			else
+		    		  next(null, "Weather saved to \'weather.json\', use \'cat weather.json\' to view it.");
+				}); 
 		    } else {
 		    	next("There was an error. Did you provide an API key? Is your Edison online? Try running edison status to check!");
 		    }

@@ -21,9 +21,9 @@ Edison is a CLI tool for help developers work on Intel Edison.
 
 *A quick check to let you know if Edison is online or offline. Use 'edison wifi' to get your Edison online.*
 
-`$ edison weather (-c, --city to set a city, defaults to Seattle), (-s, --state to set state, defaults to WA), (-k, --key *required* Weather Underground API key). See my guide for further instructions: https://github.com/mashery/edison/wiki/Using-Edison-with-the-Weather-Underground-API `
+`$ edison weather (-c, --city to set a city, defaults to Seattle), (-s, --state to set state, defaults to WA), (-k, --key *required* Weather Underground API key).`
 
-*Automatically makes a REST API call to the Weather Underground API. You must have a registered API key and provide it using -k or --key. City and State default to Seattle, WA unless otherwise specified.*
+*Automatically makes a REST API call to the Weather Underground API. You must have a registered API key and provide it using -k or --key. City and State default to Seattle, WA unless otherwise specified. See my guide for further instructions: https://github.com/mashery/edison/wiki/Using-Edison-with-the-Weather-Underground-API *
 
 `$ edison mraa-version`
 

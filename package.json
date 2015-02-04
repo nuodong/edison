@@ -1,6 +1,6 @@
 {
     "name": "edison",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "A set of command-line tools for working with Intel Edison",
     "author": "Rex St John",
     "engines": {

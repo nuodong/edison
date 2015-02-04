@@ -33,6 +33,10 @@ Edison is a CLI tool for help developers work on Intel Edison.
 
 *Update the installed version of libMRAA.*
 
+`$ edison whitelist (-i, --ip to set IP address to whitelist)`
+
+*White list a specific IP address with the XDK Daemon.*
+
 ## Installation:
 
 `$ npm install -g edison`

@@ -101,6 +101,14 @@ EdisonCLI.prototype = {
 	scanWiFi: function(next){
 		var spawn = require('child_process').spawn,
 		ssh = spawn('configure_edison', ["--wifi"],{stdio: 'inherit'});
+	},
+
+	/**
+	* White list an IP
+	*/
+	whitelist: function(ip, next){
+		var spawn = require('child_process').spawn,
+		list = spawn('xdk-whitelist', ["--add", ip],{stdio: 'inherit'});
 	}
 
 	/**

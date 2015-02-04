@@ -14,7 +14,7 @@ var program = require('commander'),
 * Define version, help info here
 */
 program
-    .version('0.0.5')
+    .version('0.0.6')
     .usage('[options] <keywords>');
 
 /**
@@ -130,6 +130,29 @@ program
 		});
 	});
 
+/**
+* Whitelist an ip
+*/ 
+program
+  .command('whitelist')
+  .option("-i, --ip [option]", "Set the ip address you want to whitelist.")
+  .description('Whitelist an ip with the XDK Daemon.')
+  .action(function(ip){
+
+		if(ip){
+			edisonCLI.whitelist(ip,function handleWhitelist(err, result){
+			  if ( err ) {
+				  	console.log(err);
+				  } else {
+				  	console.log(result);
+			  }
+			  (err)?process.exit(1):process.exit(0);
+			});
+		} else {
+			console.log ("you must provide an ip using: -i 10.0.1.7 (example ip)");
+			process.exit(0);
+		}
+	});
 /**
 * Turn Edison into an iBeacon
 */ 

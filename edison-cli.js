@@ -109,44 +109,193 @@ EdisonCLI.prototype = {
 	whitelist: function(ip, next){
 		var spawn = require('child_process').spawn,
 		list = spawn('xdk-whitelist', ["--add", ip],{stdio: 'inherit'});
-	}
-
-	/**
-	* Automatically turns Edison into an iBeacon
-	*/
-	/*
-	beacon: function(next){
-		var bleno = require('bleno');
-
-		console.log('bleno - iBeacon');
-
-		bleno.on('stateChange', function(state) {
-		  console.log('on -> stateChange: ' + state);
-
-		  if (state === 'poweredOn') {
-		    bleno.startAdvertisingIBeacon('e2c56db5dffb48d2b060d0f5a71096e0', 0, 0, -59);
-		  } else {
-		    bleno.stopAdvertising();
-		  }
-		});
-
-		bleno.on('advertisingStart', function() {
-		  console.log('on -> advertisingStart');
-		});
-
-		bleno.on('advertisingStop', function() {
-		  console.log('on -> advertisingStop');
-		});
 	},
 
-	enableBluetoothSmart: function(next){
-		var command = spawn('sh', ['/enable_bluetooth.sh']);
-		var output  = [];
+	/**
+	* Sense Temperature
+	*/
+	temp: function(pin, next){
+		var Cylon = require('cylon');
 
-		command.on('close', function(code) {
-		     next();    
-		});
-	}*/
+		Cylon
+		  .robot({ name: 'Temperature'})
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('sensor', { driver: 'analogSensor', pin: pin, connection: 'edison' })
+		  .on('ready', function(my) {
+		    var sensorVal = 0;
+		    var ready = false;
+
+		    my.sensor.on('analogRead', function(data) {
+		      sensorVal = data;
+		      console.log('Temperature Sensor Value:' + sensorVal);
+		    });
+
+		    setInterval(function() {
+		      if (ready) {
+		        var toSend = {
+		          analogSensor: sensorVal
+		        };
+		        if (err != null) {
+		          console.log("Error sending analog sensor information: " + err);
+		        }
+		      }
+		    }, 2000);
+		  })
+		  .start();
+	},
+
+	/**
+	* Sense Sound
+	*/
+	sound: function(pin, next){
+		var Cylon = require('cylon');
+
+		Cylon
+		  .robot({ name: 'Temperature'})
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('sensor', { driver: 'analogSensor', pin: pin, connection: 'edison' })
+		  .on('ready', function(my) {
+		    var sensorVal = 0;
+		    var ready = false;
+
+		    my.sensor.on('analogRead', function(data) {
+		      sensorVal = data;
+		      console.log('Sound Sensor Value:' + sensorVal);
+		    });
+
+		    setInterval(function() {
+		      if (ready) {
+		        var toSend = {
+		          analogSensor: sensorVal
+		        };
+		        if (err != null) {
+		          console.log("Error sending analog sensor information: " + err);
+		        }
+		      }
+		    }, 2000);
+		  })
+		  .start();
+	},
+
+	/**
+	* Sense light
+	*/
+	light: function(pin, next){
+		var Cylon = require('cylon');
+
+		Cylon
+		  .robot({ name: 'LightSensor'})
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('sensor', { driver: 'analogSensor', pin: pin, connection: 'edison' })
+		  .on('ready', function(my) {
+		    var sensorVal = 0;
+		    var ready = false;
+
+		    my.sensor.on('analogRead', function(data) {
+		      sensorVal = data;
+		      console.log('Light Sensor Value:' + sensorVal);
+		    });
+
+		    setInterval(function() {
+		      if (ready) {
+		        var toSend = {
+		          analogSensor: sensorVal
+		        };
+		        if (err != null) {
+		          console.log("Error sending analog sensor information: " + err);
+		        }
+		      }
+		    }, 2000);
+		  })
+		  .start();
+	},
+
+	/**
+	* Sense button presses
+	*/
+	button: function(pin, next){
+		var Cylon = require('cylon');
+
+		Cylon
+		  .robot()
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('touch', { driver: 'button', pin: pin, connection: 'edison' })
+		  .on('ready', function(my) {
+		    my.touch.on('press', function() {
+		      console.log('detected press');
+		    });
+
+		    my.touch.on('release', function() {
+			   console.log('touch released');
+		    });
+		  }).start();
+	},
+
+	/**
+	* Buzzer
+	*/
+	buzzer: function(pin, next){
+		var Cylon = require('cylon');
+
+		Cylon.robot({
+			connections: {
+				edison: { adaptor:  'intel-iot'}
+			},
+
+			devices: {
+				pin: { driver: 'direct-pin', pin: pin }
+			},
+
+		work: function(my) {
+			var value = 0;
+				every((1).second(), function() {
+				  my.pin.digitalWrite(value);
+				  value = (value == 0) ? 1 : 0;
+				});
+			}
+		}).start();
+	},
+
+	/**
+	* LCD screen
+	*/
+	lcd: function(text, next){
+		var Cylon = require('cylon');
+
+		function writeToScreen(screen, message) {
+		  screen.setCursor(0,0);
+		  screen.write(message);
+		}
+
+		Cylon
+		  .robot({ name: 'LCD'})
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('screen', { driver: 'upm-jhd1313m1', connection: 'edison' })
+		  .on('ready', function(my) {
+		    writeToScreen(my.screen, text);
+		  })
+		  .start();
+	},
+
+	/**
+	* Rotary angle sensor
+	*/
+	rotary: function(pin, next){
+		var Cylon = require('cylon');
+
+		Cylon
+		  .robot({ name: 'Rotary'})
+		  .connection('edison', { adaptor: 'intel-iot' })
+		  .device('rotary', { driver: 'analogSensor', pin: 0, connection: 'edison' })
+		  .on('ready', function(my) {
+		     var sensorVal = 0;
+		     my.rotary.on('analogRead', function(data) {
+		      sensorVal = data;
+		      console.log("Reading: " + sensorVal);
+		    });
+		  })
+		  .start();
+	}
 };
 
 module.exports = new EdisonCLI();

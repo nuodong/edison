@@ -30,7 +30,7 @@ program
   		var interval = (options.interval)?options.interval:1;
   		var pin = (options.pin)?options.pin:13;
 
-		edisonCLI.blink(interval,pin,function handleBlink(err, result){
+		edisonCLI.blink(interval,pin,function handleResult(err, result){
 		  if ( err ) {
 			  	console.log(err);
 			  } else {
@@ -40,6 +40,154 @@ program
 		  (err)?process.exit(1):process.exit(0);
 		});
 	});
+
+/**
+* Output text to the LCD
+*/ 
+program
+  .command('lcd')
+  .option("-t, --text [option]", "Text to put on the screen, defaults to Ready!")
+  .description('Output text onto the LCD screen.')
+  .action(function(options){
+  		var pin = (options.text)?options.text:"Ready!";
+
+		edisonCLI.lcd(text,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Get temperature data
+*/ 
+program
+  .command('temp')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 0.")
+  .description('Fetch temperature data.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:0;
+
+		edisonCLI.temp(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Get sound data
+*/ 
+program
+  .command('sound')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 0.")
+  .description('Fetch sound data.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:0;
+
+		edisonCLI.sound(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Get light data
+*/ 
+program
+  .command('light')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 0.")
+  .description('Fetch light data.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:0;
+
+		edisonCLI.light(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Activate the buzzer
+*/ 
+program
+  .command('buzzer')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 4.")
+  .description('Trigger the buzzer.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:4;
+
+		edisonCLI.buzzer(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Gather rotary data
+*/ 
+program
+  .command('rotary')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 0.")
+  .description('Gather rotary data.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:0;
+
+		edisonCLI.buzzer(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
+/**
+* Check the button
+*/ 
+program
+  .command('button')
+  .option("-p, --pin [option]", "Pin you would like to use, defaults to 4.")
+  .description('Gather rotary data.')
+  .action(function(options){
+  		var pin = (options.pin)?options.pin:4;
+
+		edisonCLI.button(pin,function handleResult(err, result){
+		  if ( err ) {
+			  	console.log(err);
+			  } else {
+			  // Success?
+			  console.log(result);
+		  }
+		  (err)?process.exit(1):process.exit(0);
+		});
+	});
+
 
 /**
 * Get a local weather report, takes in a city and an API key from weather underground
@@ -137,10 +285,10 @@ program
   .command('whitelist')
   .option("-i, --ip [option]", "Set the ip address you want to whitelist.")
   .description('Whitelist an ip with the XDK Daemon.')
-  .action(function(ip){
+  .action(function(options){
 
-		if(ip){
-			edisonCLI.whitelist(ip,function handleWhitelist(err, result){
+		if(options.ip){
+			edisonCLI.whitelist(options.ip,function handleWhitelist(err, result){
 			  if ( err ) {
 				  	console.log(err);
 				  } else {
@@ -153,47 +301,7 @@ program
 			process.exit(0);
 		}
 	});
-/**
-* Turn Edison into an iBeacon
-*/ 
-/*
-program
-  .command('beacon')
-  .description('Turn Intel Edison into an iBeacon using Bleno.')
-  .action(function(){
-		//Initiate a connection to an attached Edison.
-		edisonCLI.status(function handleBeacon(err, result){
-		  if ( err ) {
-			  	console.log(err);
-			  } else {
-			  // Success?
-			  console.log(result);
-		  }
-		  (err)?process.exit(1):process.exit(0);
-		});
-	});
-*/
 
-/**
-* Install + Enable Bluetooth Smart
-*/ 
-/*
-program
-  .command('ble-enable')
-  .description('Configure Edison for BLE development.')
-  .action(function(){
-		//Initiate a connection to an attached Edison.
-		edisonCLI.enableBluetoothSmart(function handleBLEEnable(err, result){
-		  if ( err ) {
-			  	console.log(err);
-			  } else {
-			  // Success?
-			  console.log(result);
-		  }
-		  (err)?process.exit(1):process.exit(0);
-		});
-	});
-*/
 /**
 * Parse the args (e.g. --a etc)
 */
